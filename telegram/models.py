@@ -21,4 +21,4 @@ class ApiToken(models.Model):
                             verbose_name=_('bot'), related_name='api_tokens')
 
     def __str__(self) -> str:
-        return f'{self.name} [{self.bot.name}]'
+        return self.name

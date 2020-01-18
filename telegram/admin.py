@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from telegram.forms import SimpleBotAdminForm
 from telegram.models import Bot, ApiToken
 
 
@@ -17,3 +18,13 @@ class BotAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         return qs.filter(user=request.user)
+
+    def get_form(self, request, obj=None, **kwargs):
+        if not request.user.is_superuser:
+            kwargs['form'] = SimpleBotAdminForm
+        return super().get_form(request, obj, **kwargs)
+
+    def save_model(self, request, obj, form, change):
+        if not obj.user:
+            obj.user = request.user
+        super().save_model(request, obj, form, change)
