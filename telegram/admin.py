@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+import utils
 from telegram.forms import SimpleBotAdminForm
 from telegram.models import Bot, ApiToken
 
@@ -7,6 +8,7 @@ from telegram.models import Bot, ApiToken
 class ApiTokenInline(admin.TabularInline):
     model = ApiToken
     extra = 0
+    readonly_fields = 'token',
 
 
 @admin.register(Bot)
@@ -25,6 +27,13 @@ class BotAdmin(admin.ModelAdmin):
         return super().get_form(request, obj, **kwargs)
 
     def save_model(self, request, obj, form, change):
-        if not obj.user:
+        if not obj.user_id:
             obj.user = request.user
         super().save_model(request, obj, form, change)
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save()
+        for instance in instances:
+            if not instance.token:
+                instance.token = utils.generate_password(32)
+            instance.save()
