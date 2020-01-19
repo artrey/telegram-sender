@@ -1,6 +1,6 @@
 from django import forms
 
-from telegram.models import Bot
+from telegram_sender.models import Bot
 
 
 class SimpleBotAdminForm(forms.ModelForm):

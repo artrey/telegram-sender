@@ -16,7 +16,8 @@ class Bot(models.Model):
 
 class ApiToken(models.Model):
     name = models.CharField(verbose_name=_('name'), max_length=128)
-    token = models.CharField(verbose_name=_('token'), max_length=128)
+    token = models.CharField(verbose_name=_('token'), max_length=128,
+                             db_index=True)
     bot = models.ForeignKey(Bot, on_delete=models.CASCADE,
                             verbose_name=_('bot'), related_name='api_tokens')
 

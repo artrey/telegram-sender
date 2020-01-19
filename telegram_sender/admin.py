@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 import utils
-from telegram.forms import SimpleBotAdminForm
-from telegram.models import Bot, ApiToken
+from telegram_sender.forms import SimpleBotAdminForm
+from telegram_sender.models import Bot, ApiToken
 
 
 class ApiTokenInline(admin.TabularInline):
