@@ -20,16 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!q9e3&&be&a3nhy^bz6$vm&wbiim)r8x&rc^%y^t9d4=kmcwn_'
+SECRET_KEY = os.getenv('SECRET_KEY', 'the-best-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST', '*')]
 
 # Application definition
-
 INSTALLED_APPS = [
     'admin_site.apps.AdminSiteConfig',  # 'django.contrib.admin',
     'django.contrib.auth',
@@ -77,7 +75,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(os.getenv('SQLITE_PATH', BASE_DIR), 'db.sqlite3'),
     }
 }
 
@@ -119,3 +117,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
