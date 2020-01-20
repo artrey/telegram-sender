@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +8,46 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+  <style>
+    nav {
+      margin-bottom: 1vw;
+    }
+    .nav-item-panel {
+      margin: 3px 10px;
+    }
+  </style>
   {% block style %}{% endblock %}
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <main>Hello</main>
+  <nav class="navbar navbar-light bg-light navbar-expand-md justify-content-around">
+    <div class="row align-items-center justify-content-around">
+        <div class="row justify-content-center">
+          <div class="nav-item-panel">
+            <a class="btn btn-light" href="{% url 'test_send' %}">{% trans 'Test send' %}</a>
+          </div>
+          <div class="nav-item-panel">
+            <a class="btn btn-light" href="{% url 'get_chat_id' %}">{% trans 'Get chat id' %}</a>
+          </div>
+        </div>
+    </div>
+
+    <div class="row align-items-center justify-content-around">
+      <div class="nav-item-panel">
+        {% blocktrans %}Hello, {{ user }}!{% endblocktrans %}
+      </div>
+      <div class="nav-item-panel">
+        <a href="/admin/" class="btn btn-primary">{% trans 'Admin panel' %}</a>
+      </div>
+      <div class="nav-item-panel">
+        <a href="/admin/logout" class="btn btn-info">{% trans 'Logout' %}</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
 </body>
 </html>

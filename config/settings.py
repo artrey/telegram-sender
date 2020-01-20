@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,6 +28,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'the-best-secret-key')
 DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST', '*')]
+
+LOGIN_URL = 'admin/login/'
+LOGIN_REDIRECT_URL = reverse_lazy('test_send')
 
 # Application definition
 INSTALLED_APPS = [

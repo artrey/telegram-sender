@@ -1,0 +1,51 @@
+<style>
+  table {
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+  td {
+    height: 3em;
+    vertical-align: middle;
+  }
+  label {
+    margin: 0;
+  }
+  .submit-btn {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+</style>
+
+<form method="post">
+  {% csrf_token %}
+
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+      {{ form.non_field_errors }}
+    </div>
+  {% endif %}
+
+  <table>
+    <tbody>
+      {% for field in form %}
+        <tr>
+          <td>
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          </td>
+          <td>&nbsp;</td>
+          <td>{{ field }}</td>
+        </tr>
+        {% if field.errors %}
+          <tr>
+            <td colspan="3">
+              <div class="alert alert-danger">{{ field.errors }}</div>
+            </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="text-align-center submit-btn">
+    <button type="submit" class="btn btn-primary">{{ btn_title }}</button>
+  </div>
+</form>

@@ -1,0 +1,16 @@
+{% extends 'telegram_sender/result_page.html' %}
+
+{% load i18n %}
+
+{% block forms %}
+  {% trans 'Get updates' as btn_title %}
+
+  <div>
+      <p>{% trans '1. Add your bot to desired chat or channel.' %}</p>
+      <p>{% trans '2. Send any message to chat or channel from your own telegram account.' %}</p>
+      <p>{% blocktrans %}3. Press "{{ btn_title }}" button below.{% endblocktrans %}</p>
+      <p>{% trans '4. Find the chat or channel id in result output.' %}</p>
+  </div>
+
+  {% include 'telegram_sender/form_body.html' %}
+{% endblock %}

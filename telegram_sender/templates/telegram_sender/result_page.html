@@ -1,0 +1,27 @@
+{% extends 'telegram_sender/base.html' %}
+
+{% load i18n %}
+
+{% block style %}
+  {{ block.super }}
+  <style>
+    .text-align-center {
+      text-align: center;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <h3 class="text-align-center">{{ title }}</h3>
+
+  {% block forms %}{% endblock %}
+
+  {% if result %}
+    {{ result }}
+  {% endif %}
+  {% if error %}
+    <div class="alert alert-danger text-align-center">
+      {% blocktrans %}Error occurred: {{ error }}{% endblocktrans %}
+    </div>
+  {% endif %}
+{% endblock %}

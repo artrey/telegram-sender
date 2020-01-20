@@ -9,12 +9,15 @@ class SimpleBotAdminForm(forms.ModelForm):
         exclude = 'user',
 
 
-class TestSendForm(forms.Form):
+class BotInjectedForm(forms.Form):
     bot = forms.ModelChoiceField(Bot.objects.none(),
                                  required=True, empty_label=None)
-    chat_id = forms.CharField(required=True)
-    message = forms.CharField(required=True)
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['bot'].queryset = Bot.objects.filter(user=user)
+
+
+class TestSendForm(BotInjectedForm):
+    chat_id = forms.CharField(required=True)
+    message = forms.CharField(required=True)
