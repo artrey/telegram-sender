@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  backend:
+    image: artrey/telegram-sender:$IMAGE
+    restart: unless-stopped
+    networks:
+      - telegram-sender-network
+    volumes:
+      - django-db:$SQLITE_PATH:rw
+      - django-static:$STATIC_ROOT:rw
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    networks:
+      - telegram-sender-network
+      - webproxy
+    depends_on:
+      - backend
+    expose:
+      - "80"
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d/
+      - ./nginx/logs/:/var/log/nginx/
+      - django-static:$STATIC_ROOT:ro
+    env_file:
+      - .env
+
+volumes:
+  django-db: {}
+  django-static: {}
+
+networks:
+  telegram-sender-network:
+    driver: bridge
+  webproxy:
+    external:
+      name: webproxy

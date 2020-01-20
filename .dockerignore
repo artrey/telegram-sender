@@ -1,0 +1,15 @@
+# Ignore everything
+**
+
+# Allowed
+!admin_site/**
+!config/**
+!telegram_sender/**
+!utils/**
+!manage.py
+!requirements.txt
+
+# Override allowed
+.idea/**
+__pycache__/**
+*.sqlite3
