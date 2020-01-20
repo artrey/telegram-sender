@@ -28,7 +28,7 @@ class SendView(View):
         send_message_via_api_token(request.POST)
         return valid_response({})
 
-    @exceptions_handle
-    def get(self, request):
-        send_message_via_api_token(request.GET)
-        return valid_response({})
+    # @exceptions_handle
+    # def get(self, request):
+    #     send_message_via_api_token(request.GET)
+    #     return valid_response({})
