@@ -1,3 +1,8 @@
+import json
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
 from telegram import Message
 
 from django.views import View
@@ -23,9 +28,14 @@ def send_message_via_api_token(context: dict) -> Message:
 
 
 class SendView(View):
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     @exceptions_handle
     def post(self, request):
-        send_message_via_api_token(request.POST)
+        context = json.loads(request.body.decode('utf-8'))
+        send_message_via_api_token(context)
         return valid_response({})
 
     # @exceptions_handle
