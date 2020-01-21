@@ -17,8 +17,13 @@
   {% block forms %}{% endblock %}
 
   {% if result %}
-    {{ result }}
+    {% block result_exists %}
+      <div class="alert alert-secondary">
+        {{ result }}
+      </div>
+    {% endblock %}
   {% endif %}
+
   {% if error %}
     <div class="alert alert-danger text-align-center">
       {% blocktrans %}Error occurred: {{ error }}{% endblocktrans %}

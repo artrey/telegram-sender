@@ -14,3 +14,11 @@
 
   {% include 'telegram_sender/form_body.html' %}
 {% endblock %}
+
+{% block result_exists %}
+  {% for update in result %}
+    <div class="alert alert-secondary">
+      {{ update }}
+    </div>
+  {% endfor %}
+{% endblock %}
