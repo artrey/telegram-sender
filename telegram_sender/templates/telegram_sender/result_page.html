@@ -16,7 +16,7 @@
 
   {% block forms %}{% endblock %}
 
-  {% if result %}
+  {% if result != None %}
     {% block result_exists %}
       <div class="alert alert-secondary">
         {{ result }}

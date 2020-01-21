@@ -21,4 +21,9 @@
       {{ update }}
     </div>
   {% endfor %}
+  {% if result|length == 0 %}
+    <div class="alert alert-warning text-align-center">
+      {% trans 'Updates not found' %}
+    </div>
+  {% endif %}
 {% endblock %}
