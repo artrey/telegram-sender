@@ -4,5 +4,5 @@ from django.utils.translation import gettext_lazy as _
 
 class AdminSite(admin.AdminSite):
     site_header = _('Telegram sender')
-    site_title = _('Telegram sender site admin')
-    index_title = None
+    site_title = _('Telegram sender')
+    index_title = _('Configuration page')
