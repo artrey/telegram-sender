@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import FormView
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from telegram_sender.forms import TestSendForm, BotInjectedForm
 from utils.telegram_helper import send_message, get_updates
