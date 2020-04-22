@@ -20,5 +20,5 @@ Send POST request with json body:
 #### curl
 
 ```bash
-curl -X POST -d '{"tok":"<token>","cid":"<chat id>","mes":"test message"}' <service address>
+curl -X POST -d '{"tok":"<token>","cid":"<chat id>","mes":"test message"}' <service address>/api/v1/send/
 ```
